@@ -85,20 +85,26 @@ begin
                         
                         if istart = '1' then
                         
-                            if idigit_valid = '1' then
-                                tmp <= tmp + luhn_rom(to_integer(unsigned(idigit)));
-                                k <= k + 1;
-                            end if;
+                            
                         
                             --check even or odd digits in sequence !!!whitout control digit
                             if inum_of_digits(0) = '0' then -- even
-                                state <= s3;
+                                if idigit_valid = '1' then
+                                    tmp <= to_integer(unsigned(idigit));
+                                    k <= k + 1;
+                                end if;
+                                
+                                state <= s1;
                             else
+                                if idigit_valid = '1' then
+                                    tmp <= luhn_rom(to_integer(unsigned(idigit)));
+                                    k <= k + 1;
+                                end if;
                                 state <= s2;
                             end if;
                         end if;
                         
-                        when s2 => 
+                        when s1 => 
                             if idigit_valid = '1' then
                                 if tmp > 10 then
                                     tmp <= tmp + luhn_rom(to_integer(unsigned(idigit))) - 10;
@@ -109,15 +115,15 @@ begin
                                 k <= k + 1;
                                 
                                 if k = to_integer(unsigned(inum_of_digits)) then
-                                    state <= s4;
+                                    state <= s3;
                                 else
-                                    state <= s3;                                
+                                    state <= s2;                                
                                 end if;
                                 
                                 
                             end if;
                             
-                        when s3 => --skip digit
+                        when s2 => --skip digit
                             if idigit_valid = '1' then
                                 k <= k + 1;
                                 
@@ -130,15 +136,15 @@ begin
                                 
                                 if k = to_integer(unsigned(inum_of_digits)) then
                                     oready <= '0';
-                                    state <= s4;
+                                    state <= s3;
                                 else
-                                    state <= s2;                                
+                                    state <= s1;                                
                                 end if;
                                 
                                 
                             end if;
                             
-                        when s4 =>
+                        when s3 =>
                         oready <= '0';
                         odone <= '1';
                          if tmp = 0 or tmp = 10 then

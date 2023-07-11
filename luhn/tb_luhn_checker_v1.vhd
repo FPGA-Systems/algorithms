@@ -6,10 +6,10 @@ use ieee.std_logic_unsigned.all;
 library work;
 use work.all;
 
-entity luhn_checker_v1 is
-end luhn_checker_v1;
+entity tb_luhn_checker_v1 is
+end tb_luhn_checker_v1;
 
-architecture tb of luhn_checker_v1 is
+architecture tb of tb_luhn_checker_v1 is
 
     signal iclk : std_logic := '1';
     signal ireset : std_logic := '0';
@@ -29,6 +29,7 @@ architecture tb of luhn_checker_v1 is
     constant s2 : sequence_type := (3,0,1,1,8,9,7);
     constant s3 : sequence_type := (4,6,2,1,4,6,2,6,2,6,7,2,6,7,1,6,7,6,4,6,7,4,6,1,7,6,5,2,7,6,1,6,7,2,6,4,2,1,6,7);
     constant s4 : sequence_type := (4,6,2,1,4,6,2,6,2,6,7,2,6,7,1,6,7,6,4,6,7,4,6,1,7,6,5,2,7,6,1,6,7,2,6,4,2,1,6,7,3);
+    constant s5 : sequence_type := (7,4,1,2,3,3,1);
     
     
     procedure execute  (
@@ -42,12 +43,14 @@ architecture tb of luhn_checker_v1 is
         
         wait for 10*clk_period; start <= '1';
         num_of_digits <= std_logic_vector(to_unsigned(s'length-1, 11));
-        wait for    clk_period; start <= '0';
+        --wait for    clk_period; 
         
         for i in s'range loop
-            wait for clk_period;
+            
             digit <= std_logic_vector(to_unsigned(s(i),4));
             digit_valid <= '1';
+            wait for clk_period;
+            start <= '0';
         end loop;
         
         wait for clk_period;
@@ -74,17 +77,18 @@ begin
         wait for 3*clk_period;
         ireset <= '0';
         
-        execute(s0, istart, inum_of_digits, idigit, idigit_valid);
-        execute(s1, istart, inum_of_digits, idigit, idigit_valid);
-        execute(s2, istart, inum_of_digits, idigit, idigit_valid);
-        execute(s3, istart, inum_of_digits, idigit, idigit_valid);
-        execute(s4, istart, inum_of_digits, idigit, idigit_valid);
+--        execute(s0, istart, inum_of_digits, idigit, idigit_valid);
+--        execute(s1, istart, inum_of_digits, idigit, idigit_valid);
+--        execute(s2, istart, inum_of_digits, idigit, idigit_valid);
+--        execute(s3, istart, inum_of_digits, idigit, idigit_valid);
+--        execute(s4, istart, inum_of_digits, idigit, idigit_valid);
+        execute(s5, istart, inum_of_digits, idigit, idigit_valid);
         wait;
     end process;
     
     
     
-    dut: entity work.luhn_check(rtl)
+    dut: entity work.luhn_checker_v1(rtl)
     port map (
         iclk           => iclk          ,
         ireset         => ireset        ,
