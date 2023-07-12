@@ -92,15 +92,21 @@ begin
                                 if idigit_valid = '1' then
                                     tmp <= to_integer(unsigned(idigit));
                                     k <= k + 1;
+                                    state <= s1;
+                                else
+                                    state <= s2;
                                 end if;
                                 
-                                state <= s1;
+                                
                             else
                                 if idigit_valid = '1' then
                                     tmp <= luhn_rom(to_integer(unsigned(idigit)));
                                     k <= k + 1;
+                                    state <= s2;
+                                else
+                                    state <= s1;
                                 end if;
-                                state <= s2;
+                                
                             end if;
                         end if;
                         
