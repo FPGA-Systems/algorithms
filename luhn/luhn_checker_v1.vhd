@@ -15,8 +15,8 @@ entity luhn_checker_v1 is
         idigit_valid: in std_logic; --valid signal for new digit
         
         oready  : out std_logic; --ready to receive next digit
-        ocorrect: out std_logic; --checked number is correct ('1' - correct)
-        oerror  : out std_logic; --checked number is incorrect ('1' - incorrect)
+        ocorrect: out std_logic; --checked sequence is correct ('1' - correct)
+        oerror  : out std_logic; --checked sequence is incorrect ('1' - incorrect)
         odone   : out std_logic  --complete computation
     );
 end luhn_checker_v1;
@@ -45,7 +45,7 @@ architecture rtl of luhn_checker_v1 is
     constant luhn_rom: rom := (0, 2, 4, 6, 8, 1, 3, 5, 7, 9 );
     
     --save temporaly result of sums
-    signal tmp: natural range 0 to 16535;--need to set correct tmp width to exclude overflow
+    signal tmp: natural range 0 to 31;--need to set correct tmp width to exclude overflow
     
     --main manager 
     type state_type is (s0, s1, s2, s3, s4, s5, s6);
@@ -121,7 +121,8 @@ begin
                                 k <= k + 1;
                                 
                                 if k = to_integer(unsigned(inum_of_digits)) then
-                                    state <= s3;
+									oready <= '0';                                    
+									state <= s3;
                                 else
                                     state <= s2;                                
                                 end if;

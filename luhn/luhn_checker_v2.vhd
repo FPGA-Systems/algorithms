@@ -28,6 +28,7 @@ architecture rtl of luhn_checker_v2 is
     --Luhn algorith requires double the value of digits, if result more then 9 => add digits
     --example 
     -- 2   3   4   5   6
+    
     -- 2x2 3x2 4x2 5x2 6x2
     -- 4   6   8   10  12
     -- 4   6   8   1+0 1+2
