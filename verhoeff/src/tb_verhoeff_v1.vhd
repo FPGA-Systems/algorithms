@@ -7,6 +7,7 @@ use ieee.std_logic_unsigned.all;
 library work;
 use work.all;
 
+--online checker https://kik.amc.nl/home/rcornet/verhoeff.html
 entity tb_verhoeff_v1 is
 end tb_verhoeff_v1;
 
