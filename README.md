@@ -9,3 +9,6 @@ This folder contains Verhoeff algorithm implementation on FPGA
 
 # Double-Dabble
 This folder contains Double-Dabble (BCD notation or shift-and-add-3 algorithm) algorithm implementation on FPGA
+
+# Karatsuba
+This folder contains sources and simple testbench for Karatsuba Multiplication algorithm implementation on FPGA
