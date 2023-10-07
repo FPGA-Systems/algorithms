@@ -12,3 +12,4 @@ This folder contains Double-Dabble (BCD notation or shift-and-add-3 algorithm) a
 
 # Karatsuba
 This folder contains sources and simple testbench for Karatsuba Multiplication algorithm implementation on FPGA
+[video record] (https://youtu.be/6UNbUcgulVc)
