@@ -4,7 +4,7 @@ use ieee.std_logic_1164.all;
 
 entity top is
 generic (
-        C_WIDTH : natural := 512 --max of ia width and ib width, must be even (increase number to nearest even)    
+        C_WIDTH : natural := 64 --max of ia width and ib width, must be even (increase number to nearest even)    
     ); 
     port (
         iclk : in std_logic;
@@ -21,7 +21,7 @@ architecture rtl of top is
     
 begin
     
-    karatsuba : entity work.karatsuba(rtl)
+    karatsuba : entity work.karatsuba_2(rtl)
     generic map(
         C_WIDTH => C_WIDTH
     )

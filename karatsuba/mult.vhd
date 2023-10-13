@@ -31,11 +31,11 @@ begin
             a <= ia;
             b <= ib;
             
-            q <= a * b;
-            q_dff1 <= q;
-            q_dff2 <= q_dff1;
-            q_dff3 <= q_dff2;
-            oq <= q_dff3;
+            oq <= a * b;
+--            q_dff1 <= q;
+--            q_dff2 <= q_dff1;
+--            q_dff3 <= q_dff2;
+--            oq <= q_dff3;
         end if;
     end process;
     

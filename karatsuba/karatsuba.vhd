@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 
 entity karatsuba is
     generic (
-        C_WIDTH : natural := 128 --max of ia width and ib width, must be even (increase number to nearest even)    
+        C_WIDTH : natural := 28 --max of ia width and ib width, must be even (increase number to nearest even)    
     ); 
     port (
         iclk : in std_logic;
